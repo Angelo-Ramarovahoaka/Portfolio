@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../layouts/Title";
-import ResumeCard from "./ResumeCard";
+import Education from "./Education";
+import Skills from "./Skills";
+import Experience from "./Experience";
+import Achievements from "./Achivement";
 
 const Resume =() =>{
+    const [educationData, setEducationData] = useState(true);
+    const [skillData, setSkillData] = useState(false);
+    const [experienceData, setExperienceData] = useState(false);
+    const [achievementData, setAchievementData] = useState(false);
     return (
         <section 
         id="resume"
@@ -15,33 +22,45 @@ const Resume =() =>{
             </div>
             <div>
                 <ul className="w-full grid grid-cols-4">
-                    <li className="resumeLi">Education</li>
-                    <li className="resumeLi">Professinal Skills</li>
-                    <li className="resumeLi">Experience</li>
-                    <li className="resumeLi">Achievements</li>
+                    <li onClick={() => 
+                        setEducationData(true) &
+                        setSkillData(false) &
+                        setExperienceData(false) &
+                        setAchievementData(false)
+                        }
+                         className={`${educationData ? "border border-designColor rounded-lg" : "border-transparent"} resumeLi`}>Education</li>
+                    <li onClick={() => 
+                        setEducationData(false) &
+                        setSkillData(true) &
+                        setExperienceData(false) &
+                        setAchievementData(false)
+                        } className={`${skillData ? "border border-designColor rounded-lg" : "border-transparent"} resumeLi`}>Professinal Skills</li>
+                    <li onClick={() => 
+                        setEducationData(false) &
+                        setSkillData(false) &
+                        setExperienceData(true) &
+                        setAchievementData(false)
+                        } className={`${experienceData ? "border border-designColor rounded-lg" : "border-transparent"} resumeLi`}>Experience</li>
+                    <li onClick={() => 
+                        setEducationData(false) &
+                        setSkillData(false) &
+                        setExperienceData(false) &
+                        setAchievementData(true)
+                        } className={`${achievementData ? "border border-designColor rounded-lg" : "border-transparent"} resumeLi`}>Achievements</li>
                 </ul>
             </div>
-            <div className="py-12 font-titleFont ">
-                <p className="text-sm text-designColor tracking-[4px]">2020 - 2023</p>
-                <h2 className="text-4xl font-bold">Education Quality</h2>
-            </div>
-            <div className="mt-14 w-1/2 h-[1000px] border-1-[6px] border-1-black border-opacity-30 flex flex-col gap-10">
-                <ResumeCard 
-                title="As - Science & Information"
-                subtitle="Mathmatics Informatique (2001 - 2005)"
-                result="4.00/5"
-                des="Higher education is tertiary leading to award of an academic degree. Higher education, also called post-secondary education"/>
-                <ResumeCard 
-                title="As - Science & Information"
-                subtitle="Mathmatics Informatique (2001 - 2005)"
-                result="4.00/5"
-                des="Higher education is tertiary leading to award of an academic degree. Higher education, also called post-secondary education"/>
-                <ResumeCard 
-                title="As - Science & Information"
-                subtitle="Mathmatics Informatique (2001 - 2005)"
-                result="4.00/5"
-                des="Higher education is tertiary leading to award of an academic degree. Higher education, also called post-secondary education"/>
-            </div>
+            {
+                educationData && <Education/>
+            }
+            {
+                skillData && <Skills/>
+            }
+            {
+                experienceData && <Experience/>
+            }
+            {
+                achievementData && <Achievements/>
+            }
         </section>
     );
 }
